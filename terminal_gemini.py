@@ -1,20 +1,24 @@
 import json
 import subprocess
 import sys
+import os
 
 def check_for_key():
+    # Get the absolute path to the directory where the script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    api_file_path = os.path.join(script_dir, "API.txt")
+
     try:
-        with open("API.txt", "r") as file:
+        with open(api_file_path, "r") as file:
             api_key = file.readline().strip()
             if api_key:
-                file.close()
                 return api_key
     except FileNotFoundError:
         pass
+
     api_key = input("Paste your GEMINI API key (https://aistudio.google.com/apikey): \n").strip()
-    with open("API.txt", "w") as file:
+    with open(api_file_path, "w") as file:
         file.write(api_key)
-        file.close()
     return api_key
 
 def build_prompt(input_text, api_key):
