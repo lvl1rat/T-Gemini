@@ -4,7 +4,6 @@ import sys
 import os
 
 def check_for_key():
-    # Get the absolute path to the directory where the script is located
     script_dir = os.path.dirname(os.path.abspath(__file__))
     api_file_path = os.path.join(script_dir, "API.txt")
 
